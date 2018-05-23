@@ -326,6 +326,8 @@ $('#btnCall').click(() => {
 	imshow_transcript = capitalize(imshow_transcript);
 	final_span.innerHTML = linebreak(imshow_transcript);
 	interim_span.innerHTML = linebreak(interim_transcript);
+	recognition.stop();
+	recognition.start();
 }
 
 });
