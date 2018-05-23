@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>TelePresence Robot Control</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+        <meta http-equiv="Content-Language" content="en-us"> 
+    	<link rel="stylesheet" href="css/style.css">
+	  	<script src="jquery.js"></script>
+        <script src="eventemitter2.min.js"></script>
+        <script src="peer.js"></script>
+        <script src="socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  
+   </head>
+   
+   <body >
+   		<div class = "title">
+  			<h1 id="header">Telepresence Robot Control</h1>
+		</div>
+
+		<div class = "sideleft">   		
+    
+  			<div id="div_UI" class = "UI"> 
+    			<h4> UI Control </h4> 
+    			<p> Robot ID: </p> <ul id="ulUser"> </ul>
+    			<input type="text" id="txtUsername" placeholder=" Enter your username" class="text_box" >
+           		 <button id="btnSignUp">Sign Up</button>
+            	<br><br>
+            	<form action="">
+              		<label for="cb1"><input id="cb_video" type="checkbox"  checked="checked" onclick="video_handleClick(this);">Video Enable</label> 
+             		 <label for="cb2"><input id="cb_audio" type="checkbox"  onclick="audio_handleClick(this);">Audio Enable</label>
+            	</form>
+            	<br/>
+            	<input type="text" id="remoteId" placeholder="Remote ID">
+          		<button id="btnCall">Connect</button>
+  			</div>
+
+        <div id = "div_Control" class = "Control">
+            <h4> Control </h4>
+            <button id=btnUP type="button" >UP</button>
+            <br>
+            <button id=btnLEFT type="button" >LEFT</button>
+            <button id=btnSTOP type="button" >STOP</button>
+            <button id=btnRIGHT type="button" >RIGHT</button>
+            <br>
+            <button id=btnDOWN type="button" >DOWN</button>
+            <br>
+            <h1 id = label_test>Test</h1>
+            </hr>
+        </div>
+
+		</div>
+		<div class = stream> 
+			<video id="remoteStream" width="500" controls></video>
+		</div>
+    <div id="button">
+      <button id="button" onclick="toggleStartStop()">
+      <img alt="Static" id="bt_img" src="mic_dinamic.gif">
+    </button>
+    </div>
+    <div id="results">
+      <span id="final_span" class="final"></span>
+      <span id="interim_span" class="interim"></span>
+      <p>
+    </div>
+   </body>
+    <script src="main.js"></script>
+</html>
