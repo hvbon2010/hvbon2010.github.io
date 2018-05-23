@@ -291,45 +291,44 @@ $('#btnCall').click(() => {
 	reset();
 	recognition.onend = reset;
 	recognition.onresult = function (event) {
-	var interim_transcript = '';
-	for (var i = event.resultIndex; i < event.results.length; ++i) {
-	if (event.results[i].isFinal) {
-	  final_transcript += event.results[i][0].transcript;
+		var interim_transcript = '';
+		for (var i = event.resultIndex; i < event.results.length; ++i) {
+		if (event.results[i].isFinal) {
+		  final_transcript += event.results[i][0].transcript;
+		}
+		else {
+		  interim_transcript += event.results[i][0].transcript;
+		}
+		}
+		console.log("%s\r\n", final_transcript);
+		if(final_transcript == "turn right")
+		{
+			conn.send(76);
+		}
+		else if(final_transcript == "turn left")
+		{
+			conn.send(74);
+		}
+		else if(final_transcript == "forward")
+		{
+			conn.send(73);
+		}
+		else if(final_transcript == "backward")
+		{
+			conn.send(188);
+		}
+		else if(final_transcript == "stop")
+		{
+			conn.send(75);
+		}
+		imshow_transcript = final_transcript;
+		final_transcript = '';
+		imshow_transcript = capitalize(imshow_transcript);
+		final_span.innerHTML = linebreak(imshow_transcript);
+		interim_span.innerHTML = linebreak(interim_transcript);
+		recognition.stop();
 	}
-	else {
-	  interim_transcript += event.results[i][0].transcript;
-	}
-	}
-	console.log("%s\r\n", final_transcript);
-	if(final_transcript == "turn right")
-	{
-		conn.send(76);
-	}
-	else if(final_transcript == "turn left")
-	{
-		conn.send(74);
-	}
-	else if(final_transcript == "forward")
-	{
-		conn.send(73);
-	}
-	else if(final_transcript == "backward")
-	{
-		conn.send(188);
-	}
-	else if(final_transcript == "stop")
-	{
-		conn.send(75);
-	}
-	imshow_transcript = final_transcript;
-	final_transcript = '';
-	imshow_transcript = capitalize(imshow_transcript);
-	final_span.innerHTML = linebreak(imshow_transcript);
-	interim_span.innerHTML = linebreak(interim_transcript);
-	recognition.stop();
 	recognition.start();
-}
-
 });
 
 ///
