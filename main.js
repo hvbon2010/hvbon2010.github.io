@@ -4,7 +4,12 @@ $('#div_Control').hide();
 ///
 const socket = io('https://tmlsocketio.herokuapp.com/');
 var remoteID='';
-
+var recognizing;
+var final_transcript = '';
+var imshow_transcript = '';
+var recognition = new webkitSpeechRecognition();
+recognition.continuous = true;
+recognition.interimResults = true;
 
 
 ///
@@ -279,9 +284,49 @@ $('#btnCall').click(() => {
       conn.send(75); 
     })//end of key
   
-  //HIDE UI div for larger Control UI
-  toggle_div();
+  	//HIDE UI div for larger Control UI
+  	toggle_div();
 
+	// speech recogintion
+	reset();
+	recognition.onend = reset;
+	recognition.onresult = function (event) {
+	var interim_transcript = '';
+	for (var i = event.resultIndex; i < event.results.length; ++i) {
+	if (event.results[i].isFinal) {
+	  final_transcript += event.results[i][0].transcript;
+	}
+	else {
+	  interim_transcript += event.results[i][0].transcript;
+	}
+	}
+	console.log("%s\r\n", final_transcript);
+	if(final_transcript == "turn right")
+	{
+		conn.send(76);
+	}
+	else if(final_transcript == "turn left")
+	{
+		conn.send(74);
+	}
+	else if(final_transcript == "forward")
+	{
+		conn.send(73);
+	}
+	else if(final_transcript == "backward")
+	{
+		conn.send(188);
+	}
+	else if(final_transcript == "stop")
+	{
+		conn.send(75);
+	}
+	imshow_transcript = final_transcript;
+	final_transcript = '';
+	imshow_transcript = capitalize(imshow_transcript);
+	final_span.innerHTML = linebreak(imshow_transcript);
+	interim_span.innerHTML = linebreak(interim_transcript);
+}
 
 });
 
@@ -307,53 +352,7 @@ function toggle_div() {
 }
 
 
-// speech recogintion
 
-    var recognizing;
-    var final_transcript = '';
-    var imshow_transcript = '';
-    var recognition = new webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    reset();
-    recognition.onend = reset;
-    recognition.onresult = function (event) {
-      var interim_transcript = '';
-      for (var i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-          final_transcript += event.results[i][0].transcript;
-        }
-        else {
-          interim_transcript += event.results[i][0].transcript;
-        }
-      }
-      console.log("%s\r\n", final_transcript);
-      if(final_transcript == "turn right")
-      {
-      	conn.send(76);
-      }
-      else if(final_transcript == "turn left")
-      {
-      	conn.send(74);
-      }
-      else if(final_transcript == "forward")
-      {
-      	conn.send(73);
-      }
-      else if(final_transcript == "backward")
-      {
-      	conn.send(188);
-      }
-      else if(final_transcript == "stop")
-      {
-      	conn.send(75);
-      }
-      imshow_transcript = final_transcript;
-      final_transcript = '';
-      imshow_transcript = capitalize(imshow_transcript);
-      final_span.innerHTML = linebreak(imshow_transcript);
-      interim_span.innerHTML = linebreak(interim_transcript);
-    }
 
     function reset() {
       recognizing = false;
