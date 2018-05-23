@@ -9,7 +9,7 @@ var final_transcript = '';
 var imshow_transcript = '';
 var recognition = new webkitSpeechRecognition();
 recognition.continuous = true;
-recognition.lang = 'vi-VN';
+recognition.lang = 'en-PH';
 recognition.interimResults = true;
 
 
@@ -364,7 +364,7 @@ function updateCountry() {
 	recognition.stop();
 	reset();
 	if(x == "English") {
-		recognition.lang = 'en-US';
+		recognition.lang = 'en-PH';
 	}
 	else if(x == "Việt Nam") {
 		recognition.lang = 'vi-VN';
