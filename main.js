@@ -301,25 +301,30 @@ $('#btnCall').click(() => {
 	}
 	}
 	console.log("%s\r\n", final_transcript);
-	if(final_transcript == "turn right" || final_transcript == "Turn right")
+	if(final_transcript == "turn right" || final_transcript == " turn right")
 	{
 		conn.send(76);
+		console.log("RIGHT");
 	}
-	else if(final_transcript == "turn left" || final_transcript == "Turn left")
+	else if(final_transcript == "turn left" || final_transcript == " turn left")
 	{
 		conn.send(74);
+		console.log("LEFT");
 	}
-	else if(final_transcript == "forward" || final_transcript == "Forward")
+	else if(final_transcript == "forward" || final_transcript == " forward")
 	{
 		conn.send(73);
+		console.log("FORWARD");
 	}
-	else if(final_transcript == "backward" || final_transcript == "Backward")
+	else if(final_transcript == "backward" || final_transcript == " backward")
 	{
 		conn.send(188);
+		console.log("BACKWARD");
 	}
-	else if(final_transcript == "stop" || final_transcript == "Stop")
+	else if(final_transcript == "stop" || final_transcript == " stop")
 	{
 		conn.send(75);
+		console.log("LEFT");
 	}
 	imshow_transcript = final_transcript;
 	final_transcript = '';
