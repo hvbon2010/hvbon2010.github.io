@@ -301,6 +301,7 @@ $('#btnCall').click(() => {
 	  interim_transcript += event.results[i][0].transcript;
 	}
 	}
+	final_transcript = final_transcript.toLowerCase(final_transcript);
 	console.log("%s\r\n", final_transcript);
 	if(final_transcript == "turn right" || final_transcript == " turn right" || final_transcript == "rẽ trái" || final_transcript == " rẽ trái")
 	{
@@ -317,7 +318,7 @@ $('#btnCall').click(() => {
 		conn.send(73);
 		console.log("FORWARD");
 	}
-	else if(final_transcript == "backward" || final_transcript == " backward" || final_transcript == "đi lùi" || final_transcript == " đi lùi")
+	else if(final_transcript == "backward" || final_transcript == " backward" || final_transcript == "lùi lại" || final_transcript == " lùi lại")
 	{
 		conn.send(188);
 		console.log("BACKWARD");
