@@ -9,6 +9,7 @@ var final_transcript = '';
 var imshow_transcript = '';
 var recognition = new webkitSpeechRecognition();
 recognition.continuous = true;
+recognition.lang = 'vi-VN';
 recognition.interimResults = true;
 
 
@@ -301,27 +302,27 @@ $('#btnCall').click(() => {
 	}
 	}
 	console.log("%s\r\n", final_transcript);
-	if(final_transcript == "turn right" || final_transcript == " turn right")
+	if(final_transcript == "turn right" || final_transcript == " turn right" || final_transcript == "rẽ trái" || final_transcript == " rẽ trái")
 	{
 		conn.send(76);
 		console.log("RIGHT");
 	}
-	else if(final_transcript == "turn left" || final_transcript == " turn left")
+	else if(final_transcript == "turn left" || final_transcript == " turn left" || final_transcript == "rẽ phải" || final_transcript == " rẽ phải")
 	{
 		conn.send(74);
 		console.log("LEFT");
 	}
-	else if(final_transcript == "forward" || final_transcript == " forward")
+	else if(final_transcript == "forward" || final_transcript == " forward" || final_transcript == "đi tới" || final_transcript == " đi tới")
 	{
 		conn.send(73);
 		console.log("FORWARD");
 	}
-	else if(final_transcript == "backward" || final_transcript == " backward")
+	else if(final_transcript == "backward" || final_transcript == " backward" || final_transcript == "đi lùi" || final_transcript == " đi lùi")
 	{
 		conn.send(188);
 		console.log("BACKWARD");
 	}
-	else if(final_transcript == "stop" || final_transcript == " stop")
+	else if(final_transcript == "stop" || final_transcript == " stop" || final_transcript == "dừng lại" || final_transcript == " dừng lại")
 	{
 		conn.send(75);
 		console.log("LEFT");
