@@ -289,7 +289,6 @@ $('#btnCall').click(() => {
 
 	// speech recogintion
 	reset();
-	recognition.onend = reset;
 	recognition.onresult = function (event) {
 		var interim_transcript = '';
 		for (var i = event.resultIndex; i < event.results.length; ++i) {
@@ -327,6 +326,7 @@ $('#btnCall').click(() => {
 		imshow_transcript = capitalize(imshow_transcript);
 		final_span.innerHTML = linebreak(imshow_transcript);
 		interim_span.innerHTML = linebreak(interim_transcript);
+		recognition.onend = reset;
 	}
 });
 
