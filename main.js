@@ -328,6 +328,26 @@ function toggle_div() {
         }
       }
       console.log("%s\r\n", final_transcript);
+      if(final_transcript == "turn right")
+      {
+      	conn.send(76);
+      }
+      else if(final_transcript == "turn left")
+      {
+      	conn.send(74);
+      }
+      else if(final_transcript == "forward")
+      {
+      	conn.send(73);
+      }
+      else if(final_transcript == "backward")
+      {
+      	conn.send(188);
+      }
+      else if(final_transcript == "stop")
+      {
+      	conn.send(75);
+      }
       imshow_transcript = final_transcript;
       final_transcript = '';
       imshow_transcript = capitalize(imshow_transcript);
