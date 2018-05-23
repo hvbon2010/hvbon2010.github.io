@@ -10,8 +10,7 @@ var imshow_transcript = '';
 var recognition = new webkitSpeechRecognition();
 recognition.continuous = true;
 recognition.interimResults = true;
-recognition.onend = reset;
-reset();
+
 
 ///
 ///     Check wheather audio or video activation
@@ -289,43 +288,46 @@ $('#btnCall').click(() => {
   	toggle_div();
 
 	// speech recogintion
+	reset();
+	recognition.onend = reset;
 	recognition.onresult = function (event) {
-		var interim_transcript = '';
-		for (var i = event.resultIndex; i < event.results.length; ++i) {
-		if (event.results[i].isFinal) {
-		  final_transcript += event.results[i][0].transcript;
-		}
-		else {
-		  interim_transcript += event.results[i][0].transcript;
-		}
-		}
-		console.log("%s\r\n", final_transcript);
-		if(final_transcript == "turn right" || final_transcript == "Turn right")
-		{
-			conn.send(76);
-		}
-		else if(final_transcript == "turn left" || final_transcript == "Turn left")
-		{
-			conn.send(74);
-		}
-		else if(final_transcript == "forward" || final_transcript == "Forward")
-		{
-			conn.send(73);
-		}
-		else if(final_transcript == "backward" || final_transcript == "Backward")
-		{
-			conn.send(188);
-		}
-		else if(final_transcript == "stop" || final_transcript == "Stop")
-		{
-			conn.send(75);
-		}
-		imshow_transcript = final_transcript;
-		final_transcript = '';
-		imshow_transcript = capitalize(imshow_transcript);
-		final_span.innerHTML = linebreak(imshow_transcript);
-		interim_span.innerHTML = linebreak(interim_transcript);
+	var interim_transcript = '';
+	for (var i = event.resultIndex; i < event.results.length; ++i) {
+	if (event.results[i].isFinal) {
+	  final_transcript += event.results[i][0].transcript;
 	}
+	else {
+	  interim_transcript += event.results[i][0].transcript;
+	}
+	}
+	console.log("%s\r\n", final_transcript);
+	if(final_transcript == "turn right" || final_transcript == "Turn right")
+	{
+		conn.send(76);
+	}
+	else if(final_transcript == "turn left" || final_transcript == "Turn left")
+	{
+		conn.send(74);
+	}
+	else if(final_transcript == "forward" || final_transcript == "Forward")
+	{
+		conn.send(73);
+	}
+	else if(final_transcript == "backward" || final_transcript == "Backward")
+	{
+		conn.send(188);
+	}
+	else if(final_transcript == "stop" || final_transcript == "Stop")
+	{
+		conn.send(75);
+	}
+	imshow_transcript = final_transcript;
+	final_transcript = '';
+	imshow_transcript = capitalize(imshow_transcript);
+	final_span.innerHTML = linebreak(imshow_transcript);
+	interim_span.innerHTML = linebreak(interim_transcript);
+}
+
 });
 
 ///
