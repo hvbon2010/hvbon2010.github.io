@@ -359,33 +359,43 @@ function toggle_div() {
 }
 
 
+function updateCountry() {
+	var x = document.getElementById("select_language").value;
+	recognition.stop();
+	reset();
+	if(x == "English") {
+		recognition.lang = 'en-US';
+	}
+	else if(x == "Việt Nam") {
+		recognition.lang = 'vi-VN';
+	}
+}
 
+function reset() {
+  recognizing = false;
+  bt_img.src = "mic_static.gif";
+}
 
-    function reset() {
-      recognizing = false;
-      bt_img.src = "mic_static.gif";
-    }
-
-    var two_line = /\n\n/g;
-    var one_line = /\n/g;
-    function linebreak(s) {
-      return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
-    }
-    var first_char = /\S/;
-    function capitalize(s) {
-      return s.replace(first_char, function(m) { return m.toUpperCase(); });
-    }
-    function toggleStartStop() {
-      if (recognizing) {
-        recognition.stop();
-        reset();
-      } else {
-        recognition.start();
-        bt_img.src = "mic_dinamic.gif";
-        recognizing = true;
-        button.innerHTML = "Click to Stop";
-      }
-    }
+var two_line = /\n\n/g;
+var one_line = /\n/g;
+function linebreak(s) {
+  return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+}
+var first_char = /\S/;
+function capitalize(s) {
+  return s.replace(first_char, function(m) { return m.toUpperCase(); });
+}
+function toggleStartStop() {
+  if (recognizing) {
+    recognition.stop();
+    reset();
+  } else {
+    recognition.start();
+    bt_img.src = "mic_dinamic.gif";
+    recognizing = true;
+    button.innerHTML = "Click to Stop";
+  }
+}
 
 ///
 /// only send 1 command after a number of same command
