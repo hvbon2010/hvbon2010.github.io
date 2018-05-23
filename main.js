@@ -321,14 +321,13 @@ $('#btnCall').click(() => {
 		{
 			conn.send(75);
 		}
+		console.log("OK");
 		imshow_transcript = final_transcript;
 		final_transcript = '';
 		imshow_transcript = capitalize(imshow_transcript);
 		final_span.innerHTML = linebreak(imshow_transcript);
 		interim_span.innerHTML = linebreak(interim_transcript);
-		recognition.stop();
 	}
-	recognition.start();
 });
 
 ///
