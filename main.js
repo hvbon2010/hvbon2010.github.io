@@ -393,7 +393,6 @@ function toggleStartStop() {
     recognition.start();
     bt_img.src = "mic_dinamic.gif";
     recognizing = true;
-    button.innerHTML = "Click to Stop";
   }
 }
 
